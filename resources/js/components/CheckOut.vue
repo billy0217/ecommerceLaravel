@@ -4,33 +4,167 @@
 			<div class="row">
 				<div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
 					<div class="box">
-						<h3 class="box-title">Select Your Hosting Plan</h3>
-						<div class="plan-selection">
-							<div class="plan-data">
+						<h3 class="box-title">Products in your cart</h3>
+
+						<div class="plan-selection" v-for="item in items" :key="item.id">
+
+							<div class="plan-data"  v-if="item.name">
 								<input id="question1" name="question" type="radio" class="with-font" value="sel" />
-								<label for="question1">Personal</label>
-								<p class="plan-text">
-									1 install | 25K visits/month | 10 GB local storage</p>
-								<span class="plan-price">$29 / mo</span>
+								<label for="question1">{{ item.name }}</label>
+								<p class="plan-text">{{ item.description}}</p>
+								<p class="plan-text">quantity: {{ item.quantity}}</p>
+								<span class="plan-price">Price: ${{ item.price}}</span>
 							</div>
 						</div>
-						<div class="plan-selection">
-							<div class="plan-data">
-								<input id="question2" name="question" type="radio" class="with-font" value="sel" />
-								<label for="question2">Profesional</label>
-								<p class="plan-text">
-									Up to 10 installs | 100K visits/month | 20 GB local storage</p>
-								<span class="plan-price">$99 / mo</span>
+					</div>
+
+					<div class="card">
+						<!--SHIPPING METHOD-->
+						<div class="panel panel-info">
+							<div class="panel-body">
+								<div class="form-group">
+									<div class="col-md-12">
+										<h4>Shipping Address</h4>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-6 col-xs-12">
+										<strong>First Name:</strong>
+										<input type="text" name="first_name" v-model="firstName" class="form-control" value="" />
+									</div>
+									<div class="span1"></div>
+									<div class="col-md-6 col-xs-12">
+										<strong>Last Name:</strong>
+										<input type="text" name="last_name" v-model="lastName" class="form-control" value="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Phone Number:</strong></div>
+									<div class="col-md-12"><input type="text" v-model="phone" name="phone_number" class="form-control" value="" /></div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Email Address:</strong></div>
+									<div class="col-md-12"><input type="text" v-model="email" name="email_address" class="form-control" value="" /></div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Address:</strong></div>
+									<div class="col-md-12">
+										<input type="text" name="address" v-model="address" class="form-control" value="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>City:</strong></div>
+									<div class="col-md-12">
+										<input type="text" name="city"  v-model="city" class="form-control" value="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>State:</strong></div>
+									<div class="col-md-12">
+										<input type="text" name="state" v-model="state" class="form-control" value="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Zip / Postal Code:</strong></div>
+									<div class="col-md-12">
+										<input type="text" name="zip_code" v-model="zipcode" class="form-control" value="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Country:</strong></div>
+									<div class="col-md-12">
+										<input type="text" class="form-control" v-model="country" name="country" value="" />
+									</div>
+								</div>
+								
 							</div>
 						</div>
-						<div class="plan-selection">
-							<div class="plan-data">
-								<input id="question3" name="question" type="radio" class="with-font" value="sel" />
-								<label for="question3">Business</label>
-								<p class="plan-text">Up to 25 installs | 400K visits/month | 30 GB local storage</p>
-								<span class="plan-price">$249 / mo</span>
+						<!--SHIPPING METHOD END-->
+						<!--CREDIT CART PAYMENT-->
+						<div class="panel panel-info">
+							<div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<div class="col-md-12"><strong>Card Type:</strong></div>
+									<div class="col-md-12">
+										<select id="CreditCardType" v-model="cardType" name="CreditCardType" class="form-control">
+											<option value="5">Visa</option>
+											<option value="6">MasterCard</option>
+											<option value="7">American Express</option>
+											<option value="8">Discover</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Credit Card Number:</strong></div>
+									<div class="col-md-12"><input type="text" v-model="cardNumber" class="form-control" name="car_number" value="" /></div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12"><strong>Card CVV:</strong></div>
+									<div class="col-md-12"><input type="text" v-model="cvv" class="form-control" name="car_code" value="" /></div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12">
+										<strong>Expiration Date</strong>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<select class="form-control" name="" v-model="expDateMonth">
+											<option value="">Month</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+									</select>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<select class="form-control" name="" v-model="expDateYear">
+											<option value="">Year</option>
+											<option value="2015">2015</option>
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<option value="2025">2025</option>
+									</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-12">
+										<span>Pay secure using your credit card.</span>
+									</div>
+									<div class="col-md-12">
+										<ul class="cards">
+											<li class="visa hand">Visa</li>
+											<li class="mastercard hand">MasterCard</li>
+											<li class="amex hand">Amex</li>
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<button type="submit" class="btn btn-primary btn-submit-fix"
+										@click.prevent="getUserAddress()">Place Order</button>
+									</div>
+								</div>
 							</div>
 						</div>
+						<!--CREDIT CART PAYMENT END-->
+					
 					</div>
 					
 				</div>
@@ -38,31 +172,27 @@
 				
 					<div class="widget">
 						<h4 class="widget-title">Order Summary</h4>
-						<div class="summary-block">
-							<div class="summary-content">
-								<div class="summary-head"><h5 class="summary-title">Personal</h5></div>
+
+						<div class="summary-block" v-for="summaryItem in items" :key="summaryItem.id">
+							<div class="summary-content" v-if="summaryItem.name">
+								<div class="summary-head"><h5 class="summary-title">{{ summaryItem.name }}</h5></div>
 								<div class="summary-price">
-									<p class="summary-text">$29 / mo</p>
-									<span class="summary-small-text pull-right">1 month</span>
+									<p class="summary-text">
+										$ {{ summaryItem.total }}
+									</p>
+									<span class="summary-small-text pull-right">
+										Q: {{ summaryItem.quantity }} x
+										P: {{ summaryItem.price}}
+									</span>
 								</div>
 							</div>
 						</div>
-						<div class="summary-block">
-							<div class="summary-content">
-							<div class="summary-head"> <h5 class="summary-title">Website Security 
-			Essential</h5></div>
-								<div class="summary-price">
-									<p class="summary-text">$229 / mo</p>
-									<span class="summary-small-text pull-right">1 month</span>
-								</div>
-							</div>
-						</div>
+						
 						<div class="summary-block">
 							<div class="summary-content">
 							<div class="summary-head"> <h5 class="summary-title">Total</h5></div>
 								<div class="summary-price">
-									<p class="summary-text">$258 / mo</p>
-									<span class="summary-small-text pull-right">1 month</span>
+									<p class="summary-text">${{ items.totalAmount }}</p>
 								</div>
 							</div>
 						</div>
@@ -77,12 +207,66 @@
 <script>
 	export default {
 		data() {
-			return{}
+			return{
+				items: [],
+				firstName: '',
+				lastName: '',
+				phone: '',
+				email: '',
+				address: '',
+				city: '',
+				state: '',
+				zipcode: '',
+				country: '',
+				cardType: '',
+				cardNumber: '',
+				cvv: '',
+				expDateMonth: '',
+				expDateYear: '',
+			}
 		},
 		methods: {
 			async getCartItems(){
 				let response = await axios.get('/checkout/get/items');
-				console.log(response);
+
+				this.items = response.data;
+				console.log(this.items);
+			},
+			async getUserAddress(){
+				if(this.firstName != '' && this.address != '' && this.cardNumber != '' && this.cvv != ''){
+					// process payment
+					let response = await axios.post('/process/user/payment', {
+						'firstName': this.firstName,
+						'lastName': this.lastName,
+						'phone': this.phone,
+						'email': this.email,
+						'address': this.address,
+						'city': this.city,
+						'state': this.state,
+						'zipcode': this.zipcode,
+						'country': this.country,
+						'cardType': this.cardType,
+						'cardNumber': this.cardNumber,
+						'cvv': this.cvv,
+						'expDateMonth': this.expDateMonth,
+						'expDateYear': this.expDateYear,
+						'amount': this.items.totalAmount,
+						'order': this.items,
+					});
+					
+					if(response.data.success){
+						this.$toastr.s(response.data.success);
+					}else{
+						this.$toastr.e(response.data.error);
+					}
+
+					setTimeout(() => {
+						window.location.href = '/';
+					},3000);
+					
+				}else{
+					this.$toastr.e('User Info incomplete');
+				}
 			}
 		},
 		created(){
